@@ -1,0 +1,69 @@
+<div class="login bg-white">
+  <div class="row my-5 justify-content-center align-self-center">
+    <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-12 col-xs-12 align-self-center shadow rounded">
+      <div class="form-left h-100 py-5 px-5">
+        <div class="alert alert-danger" *ngIf="this.erro != null">
+            {{this.erro}}
+        </div>
+        <form class="row g-4" #loginForm="ngForm">
+          <div class="col-12">
+              <label>Usuário<span class="text-danger">*</span></label>
+              <div class="input-group">
+                  <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="login.login"
+                    #usuario="ngModel"
+                    placeholder="Entre com o seu usuário">
+              </div>
+              <div *ngIf="!usuario.valid && usuario.touched" class="alert alert-danger my-1">
+                É obrigatório preencher este campo.
+              </div>
+          </div>
+
+          <div class="col-12">
+              <label>Senha<span class="text-danger">*</span></label>
+              <div class="input-group">
+                  <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    [(ngModel)]="login.senha"
+                    #senha="ngModel"
+                    placeholder="******">
+              </div>
+              <div class="alert alert-danger" *ngIf="!senha.valid && senha.touched">
+                O tamanho minimo da senha é de 6 digitos.
+              </div>
+          </div>
+
+          <div class="col-sm-6">
+              <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="inlineFormCheck"
+                    [(ngModel)]="lembrar">
+                  <label class="form-check-label" for="inlineFormCheck">Manter conectado</label>
+              </div>
+          </div>
+
+          <div class="col-12">
+              <button type="submit" class="btn btn-primary px-4 float-end mt-4">Acessar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-5 ps-0 d-none d-md-block">
+        <div class="form-right h-100 bg-primary text-white text-center pt-5">
+            <i class="bi bi-cloud-haze"></i>
+            <h2 class="fs-2">Bem-vindo ao <b>ManagerCloud!</b></h2><br />
+            <h5 class="fs-10">
+              Sua empresa não usa ainda?
+            </h5>
+            <a class="btn btn-outline-light">Faça um teste</a>
+        </div>
+    </div>
+  </div>
+</div>
