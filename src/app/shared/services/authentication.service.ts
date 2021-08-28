@@ -43,9 +43,29 @@ export class AuthenticationService {
     return this.authSubject.value;
   }
 
+  cadastrar(usuario : Usuario){
+    return this.http
+      .post<any>(
+        `${this.baseUrl}/auth/signup`,
+        usuario,
+        {
+          responseType: "json",
+          observe: 'response'
+        }).pipe(map(
+          (res : HttpResponse<any>) =>{
+            this.router.navigateByUrl('/Authentication');
+            return res;
+          },
+          ( err: string ) =>{
+            this.alert.clear();
+            this.alert.error(err);
+          }
+        ))
+  }
+
   autenticar(usuario: Usuario, lembrar: boolean) {
     return this.http
-      .post<any>(`${this.baseUrl}/login`,
+      .post<string>(`${this.baseUrl}/auth`,
         {
           'login': usuario.login,
           'senha': usuario.senha
@@ -54,7 +74,11 @@ export class AuthenticationService {
           responseType: 'json',
           observe: 'response'
         }).pipe(map(
-          (res: HttpResponse<any>) => {
+          (res: HttpResponse<string>) => {
+            if(!res.body){
+              return;
+            }
+
             if (lembrar) {
               localStorage.setItem(res.body.split(':')[0], res.body.split(':')[1]);
               localStorage.setItem('currentUser', usuario.login);
@@ -67,7 +91,7 @@ export class AuthenticationService {
           ( err: string ) =>{
             this.alert.clear();
             this.alert.error(err);
-            this.router.navigateByUrl('/Login');
+            this.router.navigateByUrl('/Authentication');
           }
         ))
   }

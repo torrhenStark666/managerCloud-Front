@@ -1,1 +1,175 @@
-<p>register works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="signup-form">
+                <form class="mt-5 border p-4 bg-light shadow">
+                <div class="alert alert-danger" *ngIf="this.erro !== null">
+                    {{this.erro}}
+                </div>
+                  <div *ngIf="step === 1">
+                    <h4 class="text-secondary">Dados da Empresa</h4>
+                    <p>Primeiro vamos precisar cadastrar sua empresa!</p>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label>CNPJ<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="cnpj"
+                              class="form-control"
+                              [(ngModel)]="empresa.cnpj"
+                              placeholder="00.000.000/0000-00">
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label>Inscrição Estadual<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="ie"
+                              class="form-control"
+                              [(ngModel)]="empresa.incricaoEstadual"
+                              placeholder="">
+                        </div>
+
+                        <div class="mb-3 col-md-12">
+                            <label>Nome Fantasia<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="nFantasia"
+                              class="form-control"
+                              [(ngModel)]="empresa.nomeFantasia"
+                              placeholder="Qual o nome comercial da sua empresa?">
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label>Razão Social<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="rSocial"
+                              class="form-control"
+                              [(ngModel)]="empresa.razaoSocial"
+                              placeholder="Empresa de teste CIA LTDA.">
+                        </div>
+                        <div class="col-md-12">
+                           <button class="btn btn-primary float-end" (click)="nextStep()">Continuar!</button>
+                        </div>
+                    </div>
+                  </div>
+                  <div *ngIf="step === 2">
+                    <h4 class="text-secondary">Endereço da Empresa</h4>
+                    <p>Tá quase lá! Agora diz pra gente, qual o endereço da sua empresa?</p>
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label>Endereço<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="nFantasia"
+                              class="form-control"
+                              [(ngModel)]="endereco.endereco"
+                              placeholder="Rua do bobo">
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label>Número<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              [(ngModel)]="endereco.numero"
+                              name="cnpj"
+                              class="form-control"
+                              placeholder="00">
+                        </div>
+
+                        <div class="mb-3 col-md-4">
+                            <label>Bairro<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="bairro"
+                              [(ngModel)]="endereco.bairro"
+                              class="form-control"
+                              placeholder="Centro">
+                        </div>
+
+                        <div class="mb-3 col-md-4">
+                            <label>CEP<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="cep"
+                              class="form-control"
+                              [(ngModel)]="endereco.cep"
+                              placeholder="85884000">
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label>Estado<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="estado"
+                              class="form-control"
+                              [(ngModel)]="endereco.estado"
+                              placeholder="Paraná">
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label>País</label>
+                            <input type="text" name="ie" class="form-control" placeholder="Brasil">
+                        </div>
+
+                        <div class="col-md-12">
+                          <button class="btn btn-primary float-end" (click)="nextStep()">Continuar</button>
+                          <button class="btn btn-outline-primary" (click)="backStep()">Voltar</button>
+                        </div>
+                    </div>
+                  </div>
+                  <div *ngIf="step === 3 || step === 4">
+                    <h4 class="text-secondary">Dados de Acesso</h4>
+                    <p>Por último, mas o mais importante, como gostaria de acessar o sistema?</p>
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label>Nome do Usuário<span class="text-danger">*</span></label>
+                            <input
+                              type="text"
+                              name="cnpj"
+                              [(ngModel)]="usuario.login"
+                              class="form-control"
+                              placeholder="">
+                        </div>
+
+                        <div class="mb-3 col-md-12">
+                            <label>Password<span class="text-danger">*</span></label>
+                            <input
+                              type="password"
+                              name="password"
+                              class="form-control"
+                              [(ngModel)]="usuario.senha"
+                              placeholder="******">
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label>Confirm Password<span class="text-danger">*</span></label>
+                            <input
+                              type="password"
+                              name="cpassword"
+                              class="form-control"
+                              [(ngModel)]="confirmPas"
+                              placeholder="******">
+                        </div>
+                        <div class="col-md-12">
+                           <button class="btn btn-primary float-end" (click)="nextStep()" [disabled]="loading === true">
+                            <span *ngIf="loading === true" class="spinner-border spinner-border-sm mr-1"></span>
+                            Finalizar
+                          </button>
+                           <button class="btn btn-outline-primary" (click)="backStep()">Voltar</button>
+                        </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="progress">
+                  <div
+                    class="progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar"
+                    [attr.aria-valuenow]="rate"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    [style.width]="rate"></div>
+                </div>
+                <p class="text-center mt-3 text-secondary">Sua empresa já é cadastrada? <a routerLink="/Authentication">Acessar</a></p>
+            </div>
+        </div>
+    </div>
+</div>

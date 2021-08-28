@@ -12,6 +12,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { AuthChildGuard } from './core/guards/auth-child.guard';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [
     AuthGuard,

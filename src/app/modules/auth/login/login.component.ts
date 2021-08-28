@@ -51,9 +51,9 @@ export class LoginComponent implements OnInit {
     this.alert.clear();
     this.loading = true;
     this.authentication.autenticar(this.login, this.lembrar)
-      .pipe(first())
       .subscribe(
         (data) => {
+          console.log(data);
           this.usuarioService.getLogin(this.login)
             .then(data => {
               this.router.navigate([this.returnUrl]).finally( () =>{ this.loading = !this.loading; });

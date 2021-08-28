@@ -1,6 +1,6 @@
 <div class="login bg-white">
   <div class="row my-5 justify-content-center align-self-center">
-    <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-12 col-xs-12 align-self-center shadow rounded">
+    <div class="offset-xxl-1 offset-xl-3 col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-12 col-xs-12 align-self-center shadow rounded">
       <div class="form-left h-100 py-5 px-5">
         <div class="alert alert-danger" *ngIf="this.erro != null">
             {{this.erro}}
@@ -14,6 +14,7 @@
                     type="text"
                     class="form-control"
                     [(ngModel)]="login.login"
+                    name="login"
                     #usuario="ngModel"
                     placeholder="Entre com o seu usuário">
               </div>
@@ -29,6 +30,7 @@
                   <input
                     type="password"
                     class="form-control"
+                    name="senha"
                     [(ngModel)]="login.senha"
                     #senha="ngModel"
                     placeholder="******">
@@ -44,13 +46,17 @@
                     class="form-check-input"
                     type="checkbox"
                     id="inlineFormCheck"
+                    name="lembrar"
                     [(ngModel)]="lembrar">
                   <label class="form-check-label" for="inlineFormCheck">Manter conectado</label>
               </div>
           </div>
 
           <div class="col-12">
-              <button type="submit" class="btn btn-primary px-4 float-end mt-4">Acessar</button>
+              <button type="submit" class="btn btn-primary px-4 float-end mt-4" (click)="acessar(this.login)" [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Acessar
+              </button>
           </div>
         </form>
       </div>
@@ -62,7 +68,7 @@
             <h5 class="fs-10">
               Sua empresa não usa ainda?
             </h5>
-            <a class="btn btn-outline-light">Faça um teste</a>
+            <a routerLink="/Authentication/signup" class="btn btn-outline-light">Faça um teste</a>
         </div>
     </div>
   </div>

@@ -55,10 +55,12 @@ export class UsuarioService {
   }
 
   getLogin(login : Usuario){
+    console.log('está aqui no getLogin')
     return this.http
       .post<Usuario>(`${this.baseUrl}/logins/findLogin`, login)
       .toPromise()
       .then( data =>{
+        console.log('deu bom o getLogin')
         this.userSubject.next(data);
       })
 
