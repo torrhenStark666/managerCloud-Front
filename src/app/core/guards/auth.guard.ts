@@ -1,15 +1,61 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { UsuarioService } from 'src/app/shared/services/usuario.service';
+import { Usuario } from '../model/login/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+
+  private login: Usuario;
+  private token: String;
+
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private loginService: UsuarioService
+  ) {
+    const user = this.loginService.userSubject.value;
+    if (!user.role || !user.ativo) {
+      if (this.authenticationService.currentUserValue) {
+        this.loginService.getLogin(this.authenticationService.currentUserValue!)
+      }
+    }
+    this.login = this.loginService.currentUserValue;
+    this.token = this.authenticationService.authValue!;
+  }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+
+    let currentUser = this.loginService.currentUserValue;
+    let tokien = this.authenticationService.authValue;
+
+    if (currentUser && tokien) {
+      if (currentUser.role) {
+
+        let list = currentUser
+          .role
+          .modulos
+          .filter((currentModule) => {
+
+            return currentModule.descricao.toString() === route.url[0].path.toUpperCase();
+          });
+        if ((list.length === 1) || route.url[0].path.toUpperCase() === 'PERFIL') {
+          return true;
+        }
+      }
+
+      this.router.navigate(['/Login'], { queryParams: { returnUrl: state.url } });
+      return false;
+    }
+    // not logged in so redirect to login page with the return url
+    this.router.navigate(['Login'], { queryParams: { returnUrl: state.url } });
+    return false;
   }
 
 }

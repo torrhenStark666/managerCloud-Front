@@ -13,6 +13,11 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path: 'Purchase'   ,
+    loadChildren: () => import('./modules/purchase/purchase.module').then(m => m.PurchaseModule),
+    canActivate:[AuthGuard]
+  },
+  {
     path: '**'              ,
     redirectTo: '/Authentication',
     pathMatch : 'full'

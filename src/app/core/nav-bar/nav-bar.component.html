@@ -1,0 +1,102 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <i class="bi bi-cloud-haze"></i> ManagerCloud
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav-scroll">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">
+            <i class="bi bi-cart"></i>
+            Compras</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="bi bi-cash"></i>
+            Financeiro</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="bi bi-gear"></i>
+            Configurações</a
+          >
+        </li>
+      </ul>
+      <div class="d-flex">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link active"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              id="navbarDropdownModulesLink"
+              href="#"
+            >
+              <i class="bi bi-grid-3x3-gap"></i>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownModulesLink"
+            >
+              <li><a class="dropdown-item" href="#">Vazio</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link active"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              id="navbarDropdownModulesLink"
+              href="#"
+            >
+              <i class="bi bi-bell"></i>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownModulesLink"
+            >
+              <li><a class="dropdown-item">Vazio</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link active dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person-circle"></i>
+              {{(user.login || null) | uppercase}}
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li><a class="dropdown-item">Configurações</a></li>
+              <li><a class="dropdown-item">Perfil</a></li>
+              <div class="dropdown-divider"></div>
+              <li><a class="dropdown-item">Encerrar Sessão</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

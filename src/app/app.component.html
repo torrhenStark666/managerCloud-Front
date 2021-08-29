@@ -1,3 +1,5 @@
+<sideBar *ngIf="authenticated()"></sideBar>
+<navBar *ngIf="authenticated()"></navBar>
 <div class="container-fluid">
   <alert></alert>
   <router-outlet></router-outlet>

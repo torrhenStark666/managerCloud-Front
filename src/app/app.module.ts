@@ -13,6 +13,8 @@ import { AuthChildGuard } from './core/guards/auth-child.guard';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SideBarComponent } from './core/side-bar/side-bar.component';
+import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AlertComponent,
     ToastComponent,
     AccessControlDirective,
+    SideBarComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
