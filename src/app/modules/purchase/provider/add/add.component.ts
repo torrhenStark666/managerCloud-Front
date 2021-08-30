@@ -142,7 +142,7 @@ export class AddProviderComponent implements OnInit {
       .subscribe(
         (res) => {
           this.alert.success("Item Atualizado com sucesso!");
-          this.router.navigate(['/Compras/Fornecedores'], { relativeTo: this.route })
+          this.router.navigate(['/Compras/Produtos'], { relativeTo: this.route })
         },
         (err) => {
           this.alert.error("Ops... Aconteceu um probleminha!");

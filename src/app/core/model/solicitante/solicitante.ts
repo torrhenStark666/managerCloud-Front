@@ -4,12 +4,8 @@ import { GrupoSolicitante } from '../grupoSolicitante/grupo-solicitante';
 
 export class Solicitante {
 
-    constructor(login : Usuario){
-        this.login = login;
-    }
-
     idSolicitante!: number;
-    login :                     Usuario;
+    login! :                     Usuario;
     grupoProduto!: GrupoProduto;
     grupoSolicitante!: GrupoSolicitante;
     dataInicio!: Date;

@@ -1,0 +1,119 @@
+<div class="content-container">
+  <div class="container-fluid">
+    <h1 *ngIf="isAddMode">Adicionar: Condição de pagamento</h1>
+    <h1 *ngIf="!isAddMode">Atualizar: Condição de pagamento</h1>
+    <div class="card shadow">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row align-items-center">
+            <div class="form-group col-6">
+              <label>Descrição</label>
+              <input
+                type="text"
+                formControlName="descricao"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.descricao.errors }"
+              />
+              <div
+                *ngIf="submitted && f.descricao.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.descricao.errors.required">
+                  Descrição é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-2">
+              <label>Juros (%)</label>
+              <input
+                type="number"
+                formControlName="juros"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.juros.errors }"
+              />
+              <div *ngIf="submitted && f.juros.errors" class="invalid-feedback">
+                <div *ngIf="f.juros.errors.required">
+                  Juros é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-2">
+              <label>Desconto (%)</label>
+              <input
+                type="number"
+                formControlName="desconto"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.desconto.errors }"
+              />
+              <div
+                *ngIf="submitted && f.desconto.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.desconto.errors.required">
+                  Desconto é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-2">
+              <label>Nº Vezes</label>
+              <input
+                type="number"
+                formControlName="quantidadeVezes"
+                class="form-control"
+                (change)="addRmCampo()"
+                [ngClass]="{
+                  'is-invalid': submitted && f.quantidadeVezes.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.quantidadeVezes.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.quantidadeVezes.errors.required">
+                  Nº Vezes é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div
+              class="form-group col-2"
+              formArrayName="diasParcelas"
+              *ngFor="let diaParcela of diasParcelas.controls; let i = index"
+            >
+              <div [formGroupName]="i" class="form-group">
+                <label>Dias {{i+1}}ª</label>
+                <input
+                  type="number"
+                  formControlName="diasParcelas"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid': submitted && diaParcela.errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && diaParcela.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="diaParcela.errors.required">
+                    Nº Vezes é um campo obrigatório.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group py-3">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span>
+              Save</button
+            >&nbsp;
+            <a routerLink="../" class="btn btn-outline-primary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

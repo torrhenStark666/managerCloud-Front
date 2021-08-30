@@ -20,9 +20,18 @@ import { AddProviderComponent } from './provider/add/add.component';
 import { AddProductComponent } from './product/add/add.component';
 import { AddColorComponent } from './color/add/add.component';
 import { ColorComponent } from './color/color.component';
+import { AddFormPayComponent } from './form-pay/add/add.component';
+import { AddTermPayComponent } from './term-pay/add/add.component';
+import { AddOrderComponent } from './order/add-order/add-order.component';
+import { RequesterComponent } from './requester/requester.component';
+import { AddRequesterComponent } from './requester/add-requester/add-requester.component';
+import { ReleaserComponent } from './releaser/releaser.component';
+import { AddReleaserComponent } from './releaser/add-releaser/add-releaser.component';
 
 const routes: Routes = [
   { path: '', canActivateChild: [AuthChildGuard], component: OrderComponent },
+  { path: 'add', canActivateChild: [AuthChildGuard], component: AddOrderComponent },
+  { path: 'edit/:id', canActivateChild: [AuthChildGuard], component: AddOrderComponent },
   { path: 'Produtos', canActivateChild: [AuthChildGuard], component: ProductComponent },
   { path: 'Produtos/add', canActivateChild: [AuthChildGuard], component: AddProductComponent },
   { path: 'Produtos/edit/:id', canActivateChild: [AuthChildGuard], component: AddProductComponent },
@@ -47,8 +56,18 @@ const routes: Routes = [
   { path: 'Fornecedores/grupo', canActivateChild: [AuthChildGuard], component: ProviderGroupComponent },
   { path: 'Fornecedores/grupo/add', canActivateChild: [AuthChildGuard], component: AddGroupProviderComponent },
   { path: 'Fornecedores/grupo/edit/:id', canActivateChild: [AuthChildGuard], component: AddGroupProviderComponent },
-  { path: 'Pagamento/forma', canActivateChild: [AuthChildGuard], component: FormPayComponent },
-  { path: 'Pagamento/condicoes', canActivateChild: [AuthChildGuard], component: TermPayComponent },
+  { path: 'Pagamentos/form', canActivateChild: [AuthChildGuard], component: FormPayComponent },
+  { path: 'Pagamentos/form/add', canActivateChild: [AuthChildGuard], component: AddFormPayComponent },
+  { path: 'Pagamentos/form/edit/:id', canActivateChild: [AuthChildGuard], component: AddFormPayComponent },
+  { path: 'Pagamentos/term', canActivateChild: [AuthChildGuard], component: TermPayComponent },
+  { path: 'Pagamentos/term/add', canActivateChild: [AuthChildGuard], component: AddTermPayComponent },
+  { path: 'Pagamentos/term/edit/:id', canActivateChild: [AuthChildGuard], component: AddTermPayComponent },
+  { path: 'Solicitantes', canActivateChild: [AuthChildGuard], component: RequesterComponent },
+  { path: 'Solicitantes/add', canActivateChild: [AuthChildGuard], component: AddRequesterComponent },
+  { path: 'Solicitantes/edit/:id', canActivateChild: [AuthChildGuard], component: AddRequesterComponent },
+  { path: 'Liberadores', canActivateChild: [AuthChildGuard], component: ReleaserComponent },
+  { path: 'Liberadores/add', canActivateChild: [AuthChildGuard], component: AddReleaserComponent },
+  { path: 'Liberadores/edit/:id', canActivateChild: [AuthChildGuard], component: ReleaserComponent },
   { path: '**', redirectTo: '' }
 ];
 

@@ -13,7 +13,6 @@ import { BaseService } from 'src/app/shared/services/base.service';
 })
 export class ProductComponent implements OnInit, OnDestroy {
 
-
   listSubscription!: Subscription;
   list: Produto[] = [];
 

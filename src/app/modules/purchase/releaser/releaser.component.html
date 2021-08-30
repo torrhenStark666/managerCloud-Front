@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <h1><i class="bi bi-info-circle"></i>&nbsp;Formas de Pagamento</h1>
+        <h1><i class="bi bi-info-circle"></i>&nbsp;Liberadores</h1>
       </div>
     </div>
 
@@ -22,7 +22,7 @@
               <div class="col-6">
                 <a
                   class="btn btn-primary float-end"
-                  routerLink="/Compras/Pagamentos/form/add"
+                  routerLink="/Compras/Liberadores/add"
                   role="button"
                 >
                   <i class="bi bi-plus-lg"></i>
@@ -31,7 +31,7 @@
                 <div class="float-end px-1">
                   <a
                     class="btn btn-secondary"
-                    routerLink="/Compras/Pagamentos/term"
+                    routerLink="/Compras/"
                     role="button"
                   >
                     <i class="bi bi-arrow-left"></i>
@@ -46,15 +46,19 @@
 
     <div class="row">
       <div class="col py-3">
-        <div class="card shadow"  *ngIf="this.list.length > 0">
+        <div class="card shadow" *ngIf="this.list.length > 0">
           <div class="card-body">
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th>OP</th>
                   <th>Sit</th>
-                  <th>ID</th>
-                  <th>Descrição</th>
+                  <th>ID Lib.</th>
+                  <th>Usuário</th>
+                  <th>Nivel</th>
+                  <th>Saldo Disp.</th>
+                  <th>Data Inicio</th>
+                  <th>Data Fim</th>
                 </tr>
               </thead>
               <tbody>
@@ -63,7 +67,7 @@
                     <button
                       type="button"
                       ngbTooltip="Deletar"
-                      (click)="delete(x.idFormaPagamento)"
+                      (click)="delete(x.idLiberador)"
                       class="btn btn-danger btn-sm align-items-center mx-1"
                     >
                       <i class="bi bi-trash"></i>
@@ -72,7 +76,7 @@
                       type="button"
                       placement="top"
                       ngbTooltip="Editar"
-                      (click)="update(x.idFormaPagamento)"
+                      (click)="update(x.idLiberador)"
                       class="
                         btn btn-secondary
                         mx-1
@@ -88,17 +92,28 @@
                       class="btn btn-circle btn-sm align-items-center mx-1"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="{{
-                        x.ativo == true ? 'ATIVO' : 'INATIVO'
-                      }}"
+                      title="{{ x.ativo == true ? 'ATIVO' : 'INATIVO' }}"
                       [ngClass]="{
                         'btn-success': x.ativo == true,
                         'btn-danger': x.ativo == false
                       }"
                     ></button>
                   </td>
-                  <td style="width: 10%">{{ x.idFormaPagamento }}</td>
-                  <td>{{ x.descricao }}</td>
+                  <td>{{ x.idLiberador }}</td>
+                  <td>{{ x.login.login }}</td>
+                  <td>{{ x.nivel }}</td>
+                  <td>
+                    {{
+                      x.valorDisponivel === null
+                        ? "SEM LIMITE"
+                        : x.valorDisponivel.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL"
+                          })
+                    }}
+                  </td>
+                  <td>{{ x.dataInicio | date: "dd/MM/yyyy" }}</td>
+                  <td>{{ x.dataFim | date: "dd/MM/yyyy" }}</td>
                 </tr>
               </tbody>
             </table>

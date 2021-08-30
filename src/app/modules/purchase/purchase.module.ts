@@ -25,6 +25,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AddProductComponent } from './product/add/add.component';
 import { ColorComponent } from './color/color.component';
 import { AddColorComponent } from './color/add/add.component';
+import { NoRecordsFoundComponent } from 'src/app/shared/components/no-records-found/no-records-found.component';
+import { AddFormPayComponent } from './form-pay/add/add.component';
+import { AddTermPayComponent } from './term-pay/add/add.component';
+import { AddOrderComponent } from './order/add-order/add-order.component';
+import { RequesterComponent } from './requester/requester.component';
+import { ReleaserComponent } from './releaser/releaser.component';
+import { AddReleaserComponent } from './releaser/add-releaser/add-releaser.component';
+import { AddRequesterComponent } from './requester/add-requester/add-requester.component';
 
 
 @NgModule({
@@ -47,7 +55,15 @@ import { AddColorComponent } from './color/add/add.component';
     AddTypeProviderComponent,
     AddProductComponent,
     ColorComponent,
-    AddColorComponent
+    AddColorComponent,
+    NoRecordsFoundComponent,
+    AddFormPayComponent,
+    AddTermPayComponent,
+    AddOrderComponent,
+    RequesterComponent,
+    ReleaserComponent,
+    AddReleaserComponent,
+    AddRequesterComponent
   ],
   imports: [
     CommonModule,

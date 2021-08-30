@@ -68,6 +68,4 @@ export class ColorComponent implements OnInit, OnDestroy {
         });
   }
 
-
-
 }

@@ -1,1 +1,140 @@
-<p>term-pay works!</p>
+<div class="content-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1><i class="bi bi-clipboard"></i>&nbsp;Condições de pagamento</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col py-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-5">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pesquisa"
+                  placeholder="Pesquise por termos aqui..."
+                />
+              </div>
+              <div class="col-3">
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  id="update"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="bi bi-arrow-clockwise"></i>
+                </button>
+              </div>
+              <div class="col-4">
+                <div class="dropdown float-end px-1">
+                  <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropDownProductMenu"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                    Básico
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropDownProductMenu"
+                  >
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        routerLink="/Compras/Pagamentos/form"
+                        >Forma de pagamento</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <a
+                  class="btn btn-primary float-end"
+                  routerLink="/Compras/Pagamentos/term/add"
+                  role="button"
+                >
+                  <i class="bi bi-plus-lg"></i>
+                  Adicionar</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col py-3">
+        <div class="card shadow" *ngIf="this.list.length > 0">
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>OP</th>
+                  <th>ID</th>
+                  <th>Descrição</th>
+                  <th>Juros (%)</th>
+                  <th>Desconto (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let x of list; let i = index">
+                  <td style="width: 15%; text-align: center">
+                    <button
+                      type="button"
+                      ngbTooltip="Deletar"
+                      (click)="delete(x.idCondicaoPagamento)"
+                      class="btn btn-danger btn-sm align-items-center mx-1"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                    <button
+                      type="button"
+                      placement="top"
+                      ngbTooltip="Editar"
+                      (click)="update(x.idCondicaoPagamento)"
+                      class="
+                        btn btn-secondary
+                        mx-1
+                        btn-circle btn-sm
+                        align-items-center
+                      "
+                    >
+                      <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                    <button
+                      type="button"
+                      placement="top"
+                      ngbTooltip="Visualizar"
+                      (click)="details(x.idCondicaoPagamento)"
+                      class="
+                        btn btn-warning
+                        mx-1
+                        btn-circle btn-sm
+                        align-items-center
+                      "
+                    >
+                      <i class="bi bi-box-arrow-in-down-right"></i>
+                    </button>
+                  </td>
+                  <td>{{ x.idCondicaoPagamento }}</td>
+                  <td>{{ x.descricao }}</td>
+                  <td>{{ x.juros }}</td>
+                  <td>{{ x.desconto }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <noRecordsFound *ngIf="this.list.length < 1"></noRecordsFound>
+      </div>
+    </div>
+  </div>
+</div>

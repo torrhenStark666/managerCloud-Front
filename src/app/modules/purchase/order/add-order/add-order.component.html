@@ -1,0 +1,307 @@
+<div class="content-container">
+  <div class="container-fluid">
+    <h1 *ngIf="isAddMode">Adicionar: Pedido de Compra</h1>
+    <h1 *ngIf="!isAddMode">Atualizar: Pedido de Compra</h1>
+    <div class="card shadow">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <h4><b>Dados do Pedido:</b></h4>
+          <hr />
+          <div class="row align-items-center">
+            <div class="form-group col-6">
+              <label for="fornecedor">Fornecedor</label>
+              <ng-select
+                [items]="list3"
+                [selectOnTab]="true"
+                notFoundText="Nenhuma informação encontrada"
+                bindLabel="nomeFantasia"
+                labelForId="fornecedor"
+                placeholder="Selecione"
+                formControlName="fornecedor"
+                [ngClass]="{
+                  'is-invalid': submitted && f.fornecedor.errors
+                }"
+              >
+              </ng-select>
+              <div
+                *ngIf="submitted && f.fornecedor.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.fornecedor.errors.required">
+                  Fornecedor é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-2">
+              <label for="mask">Tipo de Frete</label>
+              <ng-select
+                #tipoValorSelect
+                [items]="list6"
+                [selectOnTab]="true"
+                notFoundText="Nenhuma informação encontrada"
+                bindValue="value"
+                bindLabel="mask"
+                labelForId="mask"
+                placeholder="Selecione"
+                formControlName="sifFob"
+                [ngClass]="{
+                  'is-invalid': submitted && f.sifFob.errors
+                }"
+              >
+              </ng-select>
+              <div
+                *ngIf="submitted && f.sifFob.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.sifFob.errors.required">
+                  Tipo de Frete é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-2">
+              <label>Valor do frete</label>
+              <input
+                type="number"
+                formControlName="valorFrete"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && f.valorFrete.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.valorFrete.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.valorFrete.errors.required">
+                  Valor do frete é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-2">
+              <label>Previsão Entrega</label>
+              <input
+                type="date"
+                formControlName="dataPrevistaEntrega"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && f.dataPrevistaEntrega.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && f.dataPrevistaEntrega.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.dataPrevistaEntrega.errors.required">
+                  Valor do frete é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <h4><b>Pagamento:</b></h4>
+          <hr />
+          <div class="row align-items-center">
+            <div class="form-group col-6">
+              <label for="condicaoPagamento">Condição de Pagamento</label>
+              <ng-select
+                [items]="list2"
+                [selectOnTab]="true"
+                notFoundText="Nenhuma informação encontrada"
+                bindLabel="descricao"
+                labelForId="condicaoPagamento"
+                placeholder="Selecione"
+                formControlName="condicaoPagamento"
+                [ngClass]="{
+                  'is-invalid': submitted && f.condicaoPagamento.errors
+                }"
+              >
+              </ng-select>
+              <div
+                *ngIf="submitted && f.condicaoPagamento.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.condicaoPagamento.errors.required">
+                  Condição de Pagamento é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <label for="formaPagamento">Forma de Pagamento</label>
+              <ng-select
+                [items]="list1"
+                [closeOnSelect]="false"
+                notFoundText="Nenhuma informação encontrada"
+                bindLabel="descricao"
+                labelForId="formaPagamento"
+                placeholder="Selecione"
+                formControlName="formaPagamento"
+                [ngClass]="{
+                  'is-invalid': submitted && f.formaPagamento.errors
+                }"
+              >
+              </ng-select>
+              <div
+                *ngIf="submitted && f.formaPagamento.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.formaPagamento.errors.required">
+                  Forma de Pagamento é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <h4><b>Itens do Pedido:</b></h4>
+          <hr />
+          <div class="row g-3 align-items-center">
+            <div class="form-group col-2">
+              <label for="valorTotal">Valor Total: </label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                id="valorTotal"
+                disabled
+                value="{{ valorTotal }}"
+              />
+            </div>
+            <div class="form-group col-10">
+              <button
+                type="button"
+                ngbTooltip="Remover"
+                class="btn btn-danger btn-sm mx-1 float-end"
+                (click)="removeItem()"
+                [disabled]="itensPedido.length === 0"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+              <button
+                type="button"
+                ngbTooltip="Adicionar"
+                class="btn btn-primary btn-sm mx-1 float-end"
+                (click)="addItem()"
+              >
+                <i class="bi bi-plus-lg"></i>
+              </button>
+            </div>
+          </div>
+          <hr *ngIf="itensPedido.length !== 0" />
+          <div
+            formArrayName="itensPedidoCompra"
+            *ngFor="let item of itensPedido.controls; let i = index"
+          >
+          <br />
+            <div class="row align-items-center" [formGroupName]="i">
+              <div class="form-group col-4">
+                <label for="produto">Produto</label>
+                <ng-select
+                  #produtoSelect
+                  [items]="list5"
+                  [selectOnTab]="true"
+                  notFoundText="Nenhuma informação encontrada"
+                  bindLabel="descricao"
+                  labelForId="produto"
+                  placeholder="Selecione"
+                  formControlName="produto"
+                  (change)="productselected(i)"
+                  [ngClass]="{
+                    'is-invalid': submitted && itemPedido(i).produto.errors
+                  }"
+                >
+                </ng-select>
+                <div
+                  *ngIf="submitted && itemPedido(i).produto.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="itemPedido(i).produto.errors?.required">
+                    Produto é um campo obrigatório.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-4">
+                <label for="cor">Cor</label>
+                <ng-select
+                  #produtoSelect
+                  [items]="list4"
+                  [selectOnTab]="true"
+                  notFoundText="Nenhuma informação encontrada"
+                  bindLabel="descricao"
+                  labelForId="cor"
+                  placeholder="Selecione"
+                  formControlName="cor"
+                  [ngClass]="{
+                    'is-invalid': submitted && itemPedido(i).cor.errors
+                  }"
+                >
+                </ng-select>
+                <div
+                  *ngIf="submitted && itemPedido(i).cor.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="itemPedido(i).cor.errors?.required">
+                    Cor é um campo obrigatório.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-2">
+                <label>Valor UN.</label>
+                <input
+                  type="number"
+                  formControlName="valor"
+                  class="form-control"
+                  (change)="calcularTotal(i)"
+                  [ngClass]="{
+                    'is-invalid': submitted && itemPedido(i).valor.errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && itemPedido(i).valor.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="itemPedido(i).valor.errors?.required">
+                    Valor UN. é um campo obrigatório.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-2">
+                <label>Quantidade</label>
+                <input
+                  type="number"
+                  formControlName="quantidade"
+                  class="form-control"
+                  (change)="calcularTotal(i)"
+                  [ngClass]="{
+                    'is-invalid': submitted && itemPedido(i).quantidade.errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && itemPedido(i).quantidade.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="itemPedido(i).quantidade.errors?.required">
+                    Quantidade é um campo obrigatório.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <hr />
+          <div class="form-group py-3">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span>
+              Save</button
+            >&nbsp;
+            <a
+              routerLink="/Compras/"
+              class="btn btn-outline-primary"
+              >Cancel</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

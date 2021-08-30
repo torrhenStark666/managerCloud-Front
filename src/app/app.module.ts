@@ -15,6 +15,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SideBarComponent } from './core/side-bar/side-bar.component';
 import { NavBarComponent } from './core/nav-bar/nav-bar.component';
+import { NoRecordsFoundComponent } from './shared/components/no-records-found/no-records-found.component';
 
 @NgModule({
   declarations: [

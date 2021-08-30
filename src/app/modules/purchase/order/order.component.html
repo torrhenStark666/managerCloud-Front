@@ -1,1 +1,260 @@
-<p>order works!</p>
+<div class="content-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1><i class="bi bi-cart"></i>&nbsp;Pedidos de Compra</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col py-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-5">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pesquisa"
+                  placeholder="Pesquise por termos aqui..."
+                />
+              </div>
+              <div class="col-3">
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  id="update"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="bi bi-arrow-clockwise"></i>
+                </button>
+              </div>
+              <div class="col-4">
+                <div class="dropdown float-end px-1">
+                  <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropDownProductMenu"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                    Básico
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropDownProductMenu"
+                  >
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        routerLink="/Compras/Solicitantes"
+                        >Solicitante</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        routerLink="/Compras/Liberadores"
+                        >Liberador</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <a
+                  class="btn btn-primary float-end"
+                  routerLink="/Compras/add"
+                  role="button"
+                >
+                  <i class="bi bi-plus-lg"></i>
+                  Adicionar</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col py-3">
+        <div class="card shadow" *ngIf="this.list.length > 0">
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Operações</th>
+                  <th>Sit.</th>
+                  <th>ID</th>
+                  <th>Fornecedor</th>
+                  <th>Valor Total</th>
+                  <th>Prev Entrega</th>
+                  <th>Data Entrega</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let x of list; let i = index">
+                  <td style="width: 18%; text-align: center">
+                    <button
+                      type="button"
+                      ngbTooltip="Deletar"
+                      (click)="delete(x.idPedidoCompra)"
+                      [disabled]="!(x.situacao === situacaoCompra.SOLICITADO)"
+                      class="btn btn-danger btn-sm align-items-center mx-1 float-start"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                    <button
+                      type="button"
+                      placement="top"
+                      ngbTooltip="Editar"
+                      (click)="update(x.idPedidoCompra)"
+                      [disabled]="
+                        !(x.situacao === situacaoCompra.SOLICITADO)
+                      "
+                      class="
+                        btn btn-secondary
+                        mx-1 float-start
+                        btn-circle btn-sm
+                        align-items-center
+                      "
+                    >
+                      <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+
+                    <button
+                      type="button"
+                      placement="top"
+                      ngbTooltip="Visualizar"
+                      (click)="details(x.idPedidoCompra)"
+                      class="
+                        btn btn-primary
+                        mx-1 float-start
+                        btn-circle btn-sm
+                        align-items-center
+                      "
+                    >
+                      <i class="bi bi-box-arrow-in-down-right"></i>
+                    </button>
+
+                    <div class="dropdown float-start">
+                      <button
+                        class="btn btn-success dropdown-toggle"
+                        style="margin: 0%; padding:3px"
+                        *ngIf="liberador"
+                        type="button"
+                        id="dropDownPedidoMenu"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <i class="bi bi-check"></i>
+                      </button>
+                      <ul
+                        class="dropdown-menu"
+                        aria-labelledby="dropDownPedidoMenu"
+                      >
+                        <li>
+                          <button
+                            class="dropdown-item"
+                            (click)="liberarCompleto(x)"
+                            *ngIf="x.situacao === situacaoCompra.SOLICITADO"
+                          >
+                            Liberar
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            class="dropdown-item"
+                            (click)="negarCompleto(x)"
+                            *ngIf="
+                              x.situacao === situacaoCompra.SOLICITADO"
+
+                          >
+                            Negar
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                          class="dropdown-item"
+                          *ngIf="
+                            x.situacao === situacaoCompra.LIBERADO ||
+                            x.situacao ===
+                              situacaoCompra.PARCIALMENTE_LIBERADO"
+                          (click)="entregarCompleto(x)"
+                          >
+                            Entregue
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                          class="dropdown-item"
+                          *ngIf="
+                            !(x.situacao === situacaoCompra.SOLICITADO)"
+                          (click)="desfazerCompleto(x)"
+                          >
+                            Desfazer
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+
+                  <td style="width: 2%">
+                    <button
+                      class="btn btn-circle btn-sm align-items-center mx-1"
+                      data-bs-toggle="tooltip" data-bs-placement="left"
+                      title="{{
+                        x.situacao === situacaoCompra.PARCIALMENTE_LIBERADO
+                          ? 'PARCIALMENTE LIBERADO'
+                          : x.situacao === situacaoCompra.PARCIALMENTE_ENTREGUE
+                          ? 'PARCIALMENTE ENTREGUE'
+                          : x.situacao
+                      }}"
+                      [ngClass]="{
+                        'btn-secondary':
+                          x.situacao === situacaoCompra.SOLICITADO,
+                        'btn-success': x.situacao === situacaoCompra.LIBERADO,
+                        'btn-warning':
+                          x.situacao === situacaoCompra.PARCIALMENTE_LIBERADO,
+                        'btn-danger': x.situacao === situacaoCompra.NEGADO,
+                        'btn-info': x.situacao === situacaoCompra.ENTREGUE,
+                        'btn-dark':
+                          x.situacao === situacaoCompra.PARCIALMENTE_ENTREGUE
+                      }"
+                    ></button>
+                  </td>
+                  <td style="width: 2%">{{ x.idPedidoCompra }}</td>
+                  <td>{{ x.fornecedor.razaoSocial }}</td>
+                  <td>
+                    {{
+                      x.valorTotal.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                      })
+                    }}
+                  </td>
+                  <td style="width: 12%; text-align: center">
+                    {{
+                      !x.dataPrevistaEntrega
+                        ? "-"
+                        : (x.dataPrevistaEntrega | date: "dd/MM/yyyy")
+                    }}
+                  </td>
+                  <td style="width: 12%; text-align: center">
+                    {{
+                      !x.dataEntrega
+                        ? "-"
+                        : (x.dataEntrega | date: "dd/MM/yyyy")
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <noRecordsFound *ngIf="this.list.length < 1"></noRecordsFound>
+      </div>
+    </div>
+  </div>
+</div>
