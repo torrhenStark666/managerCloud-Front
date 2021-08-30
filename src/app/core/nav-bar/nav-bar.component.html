@@ -1,10 +1,9 @@
-<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary shadow">
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <i class="bi bi-cloud-haze"></i> ManagerCloud
     </a>
-    <button
-      class="navbar-toggler"
+    <button class="toggle-button navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavDropdown"
@@ -12,7 +11,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <i class="bi bi-three-dots-vertical"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav-scroll">
@@ -92,7 +91,7 @@
               <li><a class="dropdown-item">Configurações</a></li>
               <li><a class="dropdown-item">Perfil</a></li>
               <div class="dropdown-divider"></div>
-              <li><a class="dropdown-item">Encerrar Sessão</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Encerrar Sessão</a></li>
             </ul>
           </li>
         </ul>

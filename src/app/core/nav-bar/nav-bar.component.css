@@ -1,0 +1,17 @@
+.toggle-button {
+  background-color: #0d6efd;
+  padding: 10px;
+  border-style: none;
+  color: white;
+}
+
+.toggle-button:hover{
+  background-color: rgb(131, 174, 238);
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 70px 70px 70px 70px;
+}
+

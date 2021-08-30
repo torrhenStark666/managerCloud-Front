@@ -1,0 +1,110 @@
+<div class="content-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1><i class="bi bi-info-circle"></i>&nbsp;Tipo de Produtos</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col py-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="row g-3 align-items-center">
+              <div class="col-6">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pesquisa"
+                  placeholder="Pesquise por termos aqui..."
+                />
+              </div>
+              <div class="col-6">
+                <a
+                  class="btn btn-primary float-end"
+                  routerLink="/Compras/Produtos/tipo/add"
+                  role="button"
+                >
+                  <i class="bi bi-plus-lg"></i>
+                  Adicionar</a
+                >
+                <div class="float-end px-1">
+                  <a
+                    class="btn btn-secondary"
+                    routerLink="/Compras/Produtos"
+                    role="button"
+                  >
+                    <i class="bi bi-arrow-left"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col py-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>OP</th>
+                  <th>Sit</th>
+                  <th>ID</th>
+                  <th>Descrição</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let x of list; let i = index">
+                  <td style="width: 10%; text-align: center">
+                    <button
+                      type="button"
+                      ngbTooltip="Deletar"
+                      (click)="delete(x.idTipoProduto)"
+                      class="btn btn-danger btn-sm align-items-center mx-1"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                    <button
+                      type="button"
+                      placement="top"
+                      ngbTooltip="Editar"
+                      (click)="update(x.idTipoProduto)"
+                      class="
+                        btn btn-secondary
+                        mx-1
+                        btn-circle btn-sm
+                        align-items-center
+                      "
+                    >
+                      <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                  </td>
+                  <td style="width: 2%">
+                    <button
+                      class="btn btn-circle btn-sm align-items-center mx-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="{{
+                        x.ativo == true ? 'ATIVO' : 'INATIVO'
+                      }}"
+                      [ngClass]="{
+                        'btn-success': x.ativo == true,
+                        'btn-danger': x.ativo == false
+                      }"
+                    ></button>
+                  </td>
+                  <td style="width: 10%">{{ x.idTipoProduto }}</td>
+                  <td>{{ x.descricao }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AlertService } from './alert.service';
 
@@ -31,6 +32,7 @@ export class BaseService<T> {
   }
 
   getAll(){
+    this.subject.next([])
     if(this.checkType()){
       return null;
     }
@@ -38,12 +40,13 @@ export class BaseService<T> {
     return this
         .http
         .get<T[]>(`${ this.baseUrl }/${this.type}`)
-        .subscribe(data =>{
+        .pipe(map(data =>{
           this.subject.next(data);
+          return data;
         },
-        err =>{
+        (err : any) =>{
           this.alert.error((err === "Unknown Error" ? 'Sem conexão com o servidor!' : err));
-        });
+        }));
   }
 
   getbyId(id : number){

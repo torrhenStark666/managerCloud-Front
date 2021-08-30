@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.lembrar = false;
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Compras/Fornecedores';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Compras';
   }
 
   ngOnInit(): void {
@@ -35,13 +35,13 @@ export class LoginComponent implements OnInit {
     let currentUser = this.authentication.currentUserValue;
 
     this.lembrar = false;
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Compras/Fornecedores';
-    let tokien = this.authentication.authValue;
-    if (tokien) {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Compras';
+    let token = this.authentication.authValue;
+    if (token) {
       this.loading = !this.loading;
       this.usuarioService.getLogin(currentUser!)
         .then(data => {
-          this.router.navigate([this.returnUrl]).finally( () =>{ this.loading = !this.loading; });
+          this.router.navigateByUrl(this.returnUrl).finally( () =>{ this.loading = !this.loading; });
         });
     }
   }
@@ -56,7 +56,8 @@ export class LoginComponent implements OnInit {
           console.log(data);
           this.usuarioService.getLogin(this.login)
             .then(data => {
-              this.router.navigate([this.returnUrl]).finally( () =>{ this.loading = !this.loading; });
+              console.log('navegando')
+              this.router.navigateByUrl(this.returnUrl).finally( () =>{ this.loading = !this.loading; });
             });
 
         },

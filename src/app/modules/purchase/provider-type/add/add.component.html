@@ -1,0 +1,56 @@
+<div class="content-container">
+  <div class="container-fluid">
+    <h1 *ngIf="isAddMode">Adicionar: Tipo de Fornecedor</h1>
+    <h1 *ngIf="!isAddMode">Atualizar: Tipo de Fornecedor</h1>
+    <div class="card shadow">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row align-items-center">
+            <div class="form-group col-8">
+              <label>Descrição</label>
+              <input
+                type="text"
+                formControlName="descricao"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.descricao.errors }"
+              />
+              <div
+                *ngIf="submitted && f.descricao.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.descricao.errors.required">
+                  Descrição é um campo obrigatório.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-4">
+              <div class="form-check form-switch py-3">
+              <br />
+              <label class="form-check-label" for="tipoAtivo"
+                  >Vai estar ativo para uso geral?</label
+                >
+                <input
+                  id="tipoAtivo"
+                  formControlName="ativo"
+                  class="form-check-input"
+                  type="checkbox"
+                  [ngClass]="{ 'is-invalid': submitted && f.ativo.errors }"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group py-3">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span>
+              Save
+            </button>&nbsp;
+            <a routerLink="../" class="btn btn-outline-primary ">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

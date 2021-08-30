@@ -33,28 +33,26 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     let currentUser = this.loginService.currentUserValue;
-    let tokien = this.authenticationService.authValue;
+    let token = this.authenticationService.authValue;
 
-    if (currentUser && tokien) {
+    if (currentUser && token) {
       if (currentUser.role) {
 
         let list = currentUser
           .role
           .modulos
           .filter((currentModule) => {
-
             return currentModule.descricao.toString() === route.url[0].path.toUpperCase();
           });
         if ((list.length === 1) || route.url[0].path.toUpperCase() === 'PERFIL') {
           return true;
         }
+      }else{
+        this.router.navigate(['/Authentication'], { queryParams: { returnUrl: state.url } });
+        return false;
       }
-
-      this.router.navigate(['/Login'], { queryParams: { returnUrl: state.url } });
-      return false;
     }
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['Login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/Authentication'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 
