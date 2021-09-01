@@ -1,0 +1,137 @@
+<div class="content-container">
+  <div class="container-fluid">
+    <div class="row mx-1">
+      <div class="col">
+        <h1><i class="bi bi-graph-up"></i>&nbsp;Dashboard</h1>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <h4>Valores Totais por Status dos pedidos:</h4>
+      <div class="col-3">
+        <div class="card bg-secondary text-white shadow">
+          <div class="card-body">
+            <h3>
+              {{
+                valSolicitado.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL"
+                })
+              }}
+            </h3>
+          </div>
+          <div class="card-footer text-center">SOLICITADO</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card bg-success text-white shadow">
+          <div class="card-body">
+            <h3>
+              {{
+                valLiberado.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL"
+                })
+              }}
+            </h3>
+          </div>
+          <div class="card-footer text-center">LIBERADO</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card bg-danger text-white shadow">
+          <div class="card-body">
+            <h3>
+              {{
+                valNegado.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL"
+                })
+              }}
+            </h3>
+          </div>
+          <div class="card-footer text-center">NEGADO</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card bg-info text-white shadow">
+          <div class="card-body">
+            <h3>
+              {{
+                valEntregue.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL"
+                })
+              }}
+            </h3>
+          </div>
+          <div class="card-footer text-center">ENTREGUE</div>
+        </div>
+      </div>
+    </div>
+    <div class="row py-5 mx-1">
+      <div class="col-6 card shadow ps-0 d-none d-md-block">
+        <div class="card-header">
+          <h5 class="text-center">
+            Comparativo entre pedidos liberados e negados:
+          </h5>
+        </div>
+
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins"
+          >
+          </canvas>
+        </div>
+      </div>
+      <div class="col-6 shadow card ps-0 d-none d-md-block">
+        <div class="card-header">
+          <h5 class="text-center">Quantidade de pedidos por status:</h5>
+        </div>
+        <div class="card-body">
+          <div style="display: block">
+            <canvas
+              baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [plugins]="pieChartPlugins"
+              [legend]="pieChartLegend"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mx-1 d-flex">
+      <div class="col card shadow ps-0 d-none d-md-block">
+        <div class="card-header">
+          <h4 class="text-center">
+            Demonstrativo Geral dos Pedidos por status:
+          </h4>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

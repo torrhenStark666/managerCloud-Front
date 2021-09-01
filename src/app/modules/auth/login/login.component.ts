@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.lembrar = false;
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Compras';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Compras/Dashboard';
   }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     let currentUser = this.authentication.currentUserValue;
 
     this.lembrar = false;
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Compras';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Compras/Dashboard';
     let token = this.authentication.authValue;
     if (token) {
       this.loading = !this.loading;
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.alert.error(error === 'Unknown Error' ? 'Sem Conexão com o Servidor!' : error);
-          this.loading = false;
+          this.loading =  !this.loading;
         }
       );
   }

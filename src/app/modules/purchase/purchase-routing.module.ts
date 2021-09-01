@@ -27,8 +27,10 @@ import { RequesterComponent } from './requester/requester.component';
 import { AddRequesterComponent } from './requester/add-requester/add-requester.component';
 import { ReleaserComponent } from './releaser/releaser.component';
 import { AddReleaserComponent } from './releaser/add-releaser/add-releaser.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
+  { path: 'Dashboard', canActivateChild: [AuthChildGuard], component: DashboardComponent},
   { path: '', canActivateChild: [AuthChildGuard], component: OrderComponent },
   { path: 'add', canActivateChild: [AuthChildGuard], component: AddOrderComponent },
   { path: 'edit/:id', canActivateChild: [AuthChildGuard], component: AddOrderComponent },

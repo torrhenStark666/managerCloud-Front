@@ -33,6 +33,8 @@ import { RequesterComponent } from './requester/requester.component';
 import { ReleaserComponent } from './releaser/releaser.component';
 import { AddReleaserComponent } from './releaser/add-releaser/add-releaser.component';
 import { AddRequesterComponent } from './requester/add-requester/add-requester.component';
+import { ChartsModule } from 'ng2-charts';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -63,7 +65,8 @@ import { AddRequesterComponent } from './requester/add-requester/add-requester.c
     RequesterComponent,
     ReleaserComponent,
     AddReleaserComponent,
-    AddRequesterComponent
+    AddRequesterComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -72,7 +75,8 @@ import { AddRequesterComponent } from './requester/add-requester/add-requester.c
     PurchaseRoutingModule,
     NgSearchPipe,
     NgxPaginationModule,
-    NgSelectModule
+    NgSelectModule,
+    ChartsModule
   ]
 })
 export class PurchaseModule { }
