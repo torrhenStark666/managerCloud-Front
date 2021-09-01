@@ -36,11 +36,17 @@ export class OrderComponent implements OnInit, OnDestroy {
   ) {
     this.base.type = 'pedido-compras';
     this.solicitanteService.solicitante.subscribe(data => {
-      this.solicitante = data;
+      if(data.idSolicitante){
+        this.solicitante = data;
+      }
     });
     this.liberadorService.liberador.subscribe(data => {
-      this.liberador = data;
+      if(data.idLiberador){
+        this.liberador = data;
+      }
     });
+    this.solicitanteService.getAll();
+    this.liberadorService.getAll();
     this.login = this.loginService.userSubject.value;
   }
 
